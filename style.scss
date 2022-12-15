@@ -1,17 +1,62 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
 }
 
 html {
-    box-sizing: border-box;
-    height: 100%;
+	box-sizing: border-box;
+	height: 100%;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	height: 100%;
 }
 
+$size: 5rem;
+
+.calc-container {
+	display: flex;
+	flex-direction: column;
+	min-width: 10rem;
+	min-height: 10rem;
+}
+
+.clear-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	> .clear {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min: {
+			width: $size;
+			height: $size;
+		}
+	}
+}
+
+.input {
+	display: flex;
+}
+
+.numbers > * {
+	display: flex;
+}
+
+.numbers > * > *,
+.operators > * {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	min-width: $size;
+	min-height: $size;
+}
