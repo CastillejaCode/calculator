@@ -33,23 +33,35 @@ btns.forEach((e) => e.addEventListener("click", changeDisplay));
 btnClear.addEventListener("click", clearDisplay);
 
 //Save first number to variable when operator pressed
+let answer;
+const operateAnswer = function () {
+	secondNumber = +display.replace(firstNumber, "").replace(/[+-/*]/g, "");
+	if (operator === "+") answer = add(firstNumber, secondNumber);
+	if (operator === "-") answer = subtract(firstNumber, secondNumber);
+	if (operator === "*") answer = multiply(firstNumber, secondNumber);
+	if (operator === "/") answer = divide(firstNumber, secondNumber).toFixed(1);
+
+	displayElement.textContent = answer;
+};
 btnOperator.forEach((e) =>
 	e.addEventListener("click", function () {
-		firstNumber = +display.replace(e.textContent, "");
-		operator = this.textContent;
+		let count = display.match(/[+-/*]/g).length;
+		if (count > 1) {
+			operateAnswer();
+			displayElement.textContent += this.textContent;
+			firstNumber = answer;
+			console.log(firstNumber);
+			count = 0;
+			operator = this.textContent;
+		} else {
+			firstNumber = +display.replace(this.textContent, "");
+			operator = this.textContent;
+		}
+		// if(display.contains	)
 	})
 );
 //When equal pressed, parse variables into operate fx
-btnEqual.addEventListener("click", function () {
-	secondNumber = +display.replace(firstNumber, "").replace(/[+-/*]/g, "");
 
-	if (operator === "+") operator = add(firstNumber, secondNumber);
-	if (operator === "-") operator = subtract(firstNumber, secondNumber);
-	if (operator === "*") operator = multiply(firstNumber, secondNumber);
-	if (operator === "/") operator = divide(firstNumber, secondNumber).toFixed(1);
-
-	displayElement.textContent = operator;
-	operator = false;
-});
+btnEqual.addEventListener("click", operateAnswer);
 
 //After display, reset display when press another number
