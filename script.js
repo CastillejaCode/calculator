@@ -25,6 +25,7 @@ const changeDisplay = function () {
 
 const clearDisplay = function () {
 	displayElement.textContent = "";
+	firstNumber = secondNumber = operator = answer = "";
 };
 
 btns.forEach((e) => e.addEventListener("click", changeDisplay));
