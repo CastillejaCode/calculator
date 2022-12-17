@@ -17,6 +17,8 @@ let firstNumber;
 let secondNumber;
 let operator;
 let display;
+let answer;
+let count = 0;
 
 const changeDisplay = function () {
 	displayElement.textContent += this.textContent;
@@ -28,37 +30,42 @@ const clearDisplay = function () {
 	firstNumber = secondNumber = operator = answer = "";
 };
 
-btns.forEach((e) => e.addEventListener("click", changeDisplay));
-// btns.forEach((e) => e.addEventListener("click", clearDisplay));
-
-btnClear.addEventListener("click", clearDisplay);
-
-//Save first number to variable when operator pressed
-let answer;
 const operateAnswer = function () {
-	secondNumber = +display.replace(firstNumber, "").replace(/[+-/*]/g, "");
+	secondNumber = Number(
+		display.replace(firstNumber, "", 1).replace(/[+/*-]/g, "")
+	);
+	console.log(secondNumber);
+
 	if (operator === "+") answer = add(firstNumber, secondNumber);
 	if (operator === "-") answer = subtract(firstNumber, secondNumber);
 	if (operator === "*") answer = multiply(firstNumber, secondNumber);
 	if (operator === "/") answer = divide(firstNumber, secondNumber).toFixed(1);
 
-	displayElement.textContent = answer;
+	count = 0;
+
+	if (answer === "Infinity") {
+		displayElement.textContent = `You can't divide by 0!`;
+	} else displayElement.textContent = answer;
 };
+
+btns.forEach((e) => e.addEventListener("click", changeDisplay));
+// btns.forEach((e) => e.addEventListener("click", clearDisplay));
+
+btnClear.addEventListener("click", clearDisplay);
+
 btnOperator.forEach((e) =>
 	e.addEventListener("click", function () {
-		let count = display.match(/[+-/*]/g).length;
+		count++;
 		if (count > 1) {
 			operateAnswer();
 			displayElement.textContent += this.textContent;
 			firstNumber = answer;
-			console.log(firstNumber);
-			count = 0;
 			operator = this.textContent;
+			count = 0;
 		} else {
-			firstNumber = +display.replace(this.textContent, "");
+			firstNumber = display.replace(this.textContent, "");
 			operator = this.textContent;
 		}
-		// if(display.contains	)
 	})
 );
 //When equal pressed, parse variables into operate fx
