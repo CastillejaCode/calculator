@@ -3,20 +3,30 @@
 const displayUpper = document.querySelector(".display-upper");
 const displayInput = document.querySelector(".display-input");
 const displayOutput = document.querySelector(".display-output");
-const btnOperator = document.querySelectorAll(".operator");
 
+const btnOperator = document.querySelectorAll(".operator");
 const btnClear = document.querySelector(".clear");
 const btnDelete = document.querySelector(".delete");
 const buttons = document.querySelectorAll(".button");
 const btnEqual = document.querySelector(".equal");
+const btnSquareroot = document.querySelector(".squareroot");
 
 const add = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
 const exponent = (x, y) => x ** y;
+const squareroot = (x) => Math.sqrt(x);
 
-const operate = (x, y, fx) => fx(x, y);
+const operate = (x, y, fx) => {
+	if (fx === squareroot) return fx(x);
+	else return fx(x, y);
+};
+
+const updateDisplay = function () {
+	displayInput.textContent = operation;
+	displayOutput.textContent = answer;
+};
 
 let operation = "";
 let term1;
@@ -25,11 +35,6 @@ let operator;
 let subOperation;
 let answer;
 let count = 0;
-
-const updateDisplay = function () {
-	displayInput.textContent = operation;
-	displayOutput.textContent = answer;
-};
 
 buttons.forEach((e) =>
 	e.addEventListener("click", (e) => {
@@ -48,11 +53,16 @@ btnOperator.forEach((e) =>
 		}
 
 		//Allow using operator to find answer and continue equation
-		if (operation.match(/[*^+/-]/g).length > 1) {
-			term2 = operation.replace(subOperation, "").replace(/[*^+/-]/g, "");
+		if (operation.match(/[*^+/√-]/g).length > 1) {
+			term2 = operation.replace(subOperation, "").replace(/[*^+/√-]/g, "");
+			if (operation.match("√")) {
+				term1 = operation.replace(/[\D]/g, "");
+				if (operation.slice(-1) == "√") term1 = term1.slice(0, 1);
+			}
+
 			answer = operate(term1, term2, operator);
-			console.log(term2, answer);
 			operation = answer + `${e.target.value}`;
+			if (operation.slice(-1) == "√") operation = `${e.target.value}` + answer;
 			answer = "";
 			updateDisplay();
 		}
@@ -63,13 +73,15 @@ btnOperator.forEach((e) =>
 		if (e.target.value === "-") operator = subtract;
 		if (e.target.value === "+") operator = add;
 		if (e.target.value === "^") operator = exponent;
-
+		if (e.target.value === "√") operator = squareroot;
 		subOperation = operation;
 	})
 );
 
 btnEqual.addEventListener("click", () => {
 	term2 = Number(operation.replace(subOperation, ""));
+
+	if (operation.match("√")) term1 = operation.replace("√", "");
 	answer = operate(term1, term2, operator);
 
 	updateDisplay();
