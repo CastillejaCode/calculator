@@ -46,17 +46,18 @@ btnOperator.forEach((e) =>
 			answer = "";
 			updateDisplay();
 		}
-		console.log(operation);
-		// if (operation.match(/[*^+/-]/g).length > 1 && !displayOutput.textContent) {
-		// 	term2 = operation
-		// 		.substring(0, operation.length - 1)
-		// 		.replace(subOperation, "");
-		// 	answer = operate(term1, term2, operator);
-		// 	displayInput.textContent = operation = answer + `${e.target.value}`;
-		// 	answer = "";
-		// 	console.log(operation, answer);
 
-		term1 = Number(operation.substring(0, operation.length - 1));
+		//Allow using operator to find answer and continue equation
+		if (operation.match(/[*^+/-]/g).length > 1) {
+			term2 = operation.replace(subOperation, "").replace(/[*^+/-]/g, "");
+			answer = operate(term1, term2, operator);
+			console.log(term2, answer);
+			operation = answer + `${e.target.value}`;
+			answer = "";
+			updateDisplay();
+		}
+
+		term1 = +operation.substring(0, operation.length - 1);
 		if (e.target.value === "/") operator = divide;
 		if (e.target.value === "*") operator = multiply;
 		if (e.target.value === "-") operator = subtract;
