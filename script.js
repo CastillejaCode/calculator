@@ -24,6 +24,7 @@ let term2;
 let operator;
 let subOperation;
 let answer;
+let count = 0;
 
 const updateDisplay = function () {
 	displayInput.textContent = operation;
@@ -39,22 +40,35 @@ buttons.forEach((e) =>
 
 btnOperator.forEach((e) =>
 	e.addEventListener("click", (e) => {
-		if (operation.match(/[*^+/-]/g).length > 1) return;
-		else {
-			term1 = +operation.substring(0, operation.length - 1);
-			if (e.target.value === "/") operator = divide;
-			if (e.target.value === "*") operator = multiply;
-			if (e.target.value === "-") operator = subtract;
-			if (e.target.value === "+") operator = add;
-			if (e.target.value === "^") operator = exponent;
-			subOperation = operation;
+		//Allow adding answer to new number
+		if (answer) {
+			operation = answer + `${e.target.value}`;
+			answer = "";
+			updateDisplay();
 		}
+		console.log(operation);
+		// if (operation.match(/[*^+/-]/g).length > 1 && !displayOutput.textContent) {
+		// 	term2 = operation
+		// 		.substring(0, operation.length - 1)
+		// 		.replace(subOperation, "");
+		// 	answer = operate(term1, term2, operator);
+		// 	displayInput.textContent = operation = answer + `${e.target.value}`;
+		// 	answer = "";
+		// 	console.log(operation, answer);
+
+		term1 = Number(operation.substring(0, operation.length - 1));
+		if (e.target.value === "/") operator = divide;
+		if (e.target.value === "*") operator = multiply;
+		if (e.target.value === "-") operator = subtract;
+		if (e.target.value === "+") operator = add;
+		if (e.target.value === "^") operator = exponent;
+
+		subOperation = operation;
 	})
 );
 
 btnEqual.addEventListener("click", () => {
 	term2 = Number(operation.replace(subOperation, ""));
-	console.log(term1, term2);
 	answer = operate(term1, term2, operator);
 
 	updateDisplay();
