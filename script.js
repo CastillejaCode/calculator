@@ -54,6 +54,11 @@ btnEqual.addEventListener("click", () => {
 	updateDisplay();
 });
 
+btnClear.addEventListener("click", (e) => {
+	operation = answer = "";
+	updateDisplay();
+});
+
 // const changeDisplay = function () {
 // 	displayElement.textContent += this.textContent;
 // 	display = displayElement.value = displayElement.textContent;
