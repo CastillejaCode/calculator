@@ -36,7 +36,8 @@ const checkError = function () {
 		answer = "DIVIDE BY 0 ERROR";
 		displayInput.textContent = `:(`;
 		resetScreen();
-	} else if (answer.toString() == "NaN") {
+	}
+	if (answer.toString() == "NaN") {
 		answer = "SYNTAX ERROR";
 		displayInput.textContent = `:(`;
 		resetScreen();
@@ -62,14 +63,16 @@ const checkDecimal = function () {
 
 buttons.forEach((e) =>
 	e.addEventListener("click", (e) => {
-		// if (!answer) {
-		// 	operation = answer = "";
-		// 	updateDisplay();
-		// }
 		operation += e.target.value;
 		updateDisplay();
 	})
 );
+
+document.addEventListener("keydown", (e) => {
+	console.log(e);
+	operation += e.target.value;
+	updateDisplay();
+});
 
 btnOperator.forEach((e) =>
 	e.addEventListener("click", (e) => {
@@ -119,9 +122,9 @@ btnEqual.addEventListener("click", () => {
 		answer = "SYNTAX ERROR";
 		resetScreen();
 	} else answer = operate(term1, term2, operator);
-	checkError();
 	checkDecimal();
 	updateDisplay();
+	console.log(answer);
 });
 
 btnClear.addEventListener("click", (e) => {
@@ -134,7 +137,6 @@ btnDelete.addEventListener("click", (e) => {
 	updateDisplay();
 });
 
-console.log(typeof NaN.toString());
 // const changeDisplay = function () {
 // 	displayElement.textContent += this.textContent;
 // 	display = displayElement.value = displayElement.textContent;
