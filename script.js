@@ -23,6 +23,14 @@ const operate = (x, y, fx) => {
 	else return fx(x, y);
 };
 
+let operation = "";
+let term1;
+let term2;
+let operator;
+let subOperation;
+let answer = "";
+let count = 0;
+
 const divideByZer0 = function () {
 	if (answer == "Infinity") {
 		answer = "DIVIDE BY 0 ERROR";
@@ -44,20 +52,16 @@ const resetScreen = function () {
 	}, 1000);
 };
 
-let operation = "";
-let term1;
-let term2;
-let operator;
-let subOperation;
-let answer;
-let count = 0;
+const checkDecimal = function () {
+	if (answer % 1 != 0) answer = Math.round(answer * 100) / 100;
+};
 
 buttons.forEach((e) =>
 	e.addEventListener("click", (e) => {
-		if (answer) {
-			operation = answer = "";
-			updateDisplay();
-		}
+		// if (!answer) {
+		// 	operation = answer = "";
+		// 	updateDisplay();
+		// }
 		operation += e.target.value;
 		updateDisplay();
 	})
@@ -82,6 +86,7 @@ btnOperator.forEach((e) =>
 			}
 
 			answer = operate(term1, term2, operator);
+			checkDecimal();
 			divideByZer0();
 			operation = answer + `${e.target.value}`;
 			if (operation.slice(-1) == "√") operation = `${e.target.value}` + answer;
@@ -105,12 +110,13 @@ btnEqual.addEventListener("click", () => {
 	term2 = Number(operation.replace(subOperation, ""));
 
 	if (operation.match("√")) term1 = operation.replace("√", "");
-	console.log(operation);
 
 	if (!operation.match(/[*^+/√-]/g)) {
 		answer = "SYNTAX ERROR";
 		resetScreen();
 	} else answer = operate(term1, term2, operator);
+
+	checkDecimal();
 
 	updateDisplay();
 });
@@ -125,6 +131,7 @@ btnDelete.addEventListener("click", (e) => {
 	updateDisplay();
 });
 
+console.log(Math.round(9.856 * 100) / 100);
 // const changeDisplay = function () {
 // 	displayElement.textContent += this.textContent;
 // 	display = displayElement.value = displayElement.textContent;
