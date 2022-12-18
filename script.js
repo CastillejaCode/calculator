@@ -6,6 +6,7 @@ const displayOutput = document.querySelector(".display-output");
 const btnOperator = document.querySelectorAll(".operator");
 
 const btnClear = document.querySelector(".clear");
+const btnDelete = document.querySelector(".delete");
 const buttons = document.querySelectorAll(".button");
 const btnEqual = document.querySelector(".equal");
 
@@ -13,6 +14,7 @@ const add = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
+const exponent = (x, y) => x ** y;
 
 const operate = (x, y, fx) => fx(x, y);
 
@@ -37,12 +39,16 @@ buttons.forEach((e) =>
 
 btnOperator.forEach((e) =>
 	e.addEventListener("click", (e) => {
-		term1 = +operation.substring(0, operation.length - 1);
-		if (e.target.value === "/") operator = divide;
-		if (e.target.value === "*") operator = multiply;
-		if (e.target.value === "-") operator = subtract;
-		if (e.target.value === "+") operator = add;
-		subOperation = operation;
+		if (operation.match(/[*^+/-]/g).length > 1) return;
+		else {
+			term1 = +operation.substring(0, operation.length - 1);
+			if (e.target.value === "/") operator = divide;
+			if (e.target.value === "*") operator = multiply;
+			if (e.target.value === "-") operator = subtract;
+			if (e.target.value === "+") operator = add;
+			if (e.target.value === "^") operator = exponent;
+			subOperation = operation;
+		}
 	})
 );
 
@@ -56,6 +62,11 @@ btnEqual.addEventListener("click", () => {
 
 btnClear.addEventListener("click", (e) => {
 	operation = answer = "";
+	updateDisplay();
+});
+
+btnDelete.addEventListener("click", (e) => {
+	operation = operation.substring(0, operation.length - 1);
 	updateDisplay();
 });
 
