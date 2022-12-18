@@ -31,9 +31,13 @@ let subOperation;
 let answer = "";
 let count = 0;
 
-const divideByZer0 = function () {
+const checkError = function () {
 	if (answer == "Infinity") {
 		answer = "DIVIDE BY 0 ERROR";
+		displayInput.textContent = `:(`;
+		resetScreen();
+	} else if (answer.toString() == "NaN") {
+		answer = "SYNTAX ERROR";
 		displayInput.textContent = `:(`;
 		resetScreen();
 	}
@@ -41,7 +45,7 @@ const divideByZer0 = function () {
 
 const updateDisplay = function () {
 	displayInput.textContent = operation;
-	divideByZer0();
+	checkError();
 	displayOutput.textContent = answer;
 };
 
@@ -87,7 +91,7 @@ btnOperator.forEach((e) =>
 
 			answer = operate(term1, term2, operator);
 			checkDecimal();
-			divideByZer0();
+			checkError();
 			operation = answer + `${e.target.value}`;
 			if (operation.slice(-1) == "√") operation = `${e.target.value}` + answer;
 
@@ -115,9 +119,8 @@ btnEqual.addEventListener("click", () => {
 		answer = "SYNTAX ERROR";
 		resetScreen();
 	} else answer = operate(term1, term2, operator);
-
+	checkError();
 	checkDecimal();
-
 	updateDisplay();
 });
 
@@ -131,7 +134,7 @@ btnDelete.addEventListener("click", (e) => {
 	updateDisplay();
 });
 
-console.log(Math.round(9.856 * 100) / 100);
+console.log(typeof NaN.toString());
 // const changeDisplay = function () {
 // 	displayElement.textContent += this.textContent;
 // 	display = displayElement.value = displayElement.textContent;
