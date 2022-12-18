@@ -18,75 +18,39 @@ body {
   height: 100%;
 }
 
-.calc-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 10rem;
-  min-height: 10rem;
-}
-
-.display-clear-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.display {
+button {
   min-width: 5rem;
   min-height: 5rem;
+  margin: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.calculator {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .display-container {
-  flex-grow: 1;
+  margin: 0.25rem;
+  border: solid black 1px;
+  font-size: 1.25rem;
+}
+.display-container > * {
+  display: flex;
+  min-height: 2.5rem;
+  align-items: center;
+  padding: 0 1rem;
 }
 
-.clear-container {
-  display: flex;
+.display-upper {
+  justify-content: flex-start;
+}
+
+.display-lower {
   justify-content: flex-end;
-  align-items: center;
-}
-.clear-container > .clear {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  min-width: 5rem;
-  min-height: 5rem;
 }
 
-.input {
+.input > * {
   display: flex;
-}
-
-.numbers > * {
-  display: flex;
-}
-
-.numbers > * > *,
-.operators > * {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 5rem;
-  min-height: 5rem;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border: solid 1px;
-  margin: 1px;
-}
-.numbers > * > *:hover,
-.operators > *:hover {
-  background-color: lightgray;
-  transition: 0.2s ease-out;
-}
-
-.operators {
-  margin: 1px;
 }/*# sourceMappingURL=style.css.map */

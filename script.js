@@ -3,9 +3,10 @@
 const displayUpper = document.querySelector(".display-upper");
 const displayInput = document.querySelector(".display-input");
 const displayOutput = document.querySelector(".display-output");
+const btnOperator = document.querySelectorAll(".operator");
+
 const btnClear = document.querySelector(".clear");
 const buttons = document.querySelectorAll(".button");
-const btnOperator = document.querySelectorAll(".operator");
 const btnEqual = document.querySelector(".equal");
 
 const add = (x, y) => x + y;
@@ -16,9 +17,15 @@ const divide = (x, y) => x / y;
 const operate = (x, y, fx) => fx(x, y);
 
 let operation = "";
+let term1;
+let term2;
+let operator;
+let subOperation;
+let answer;
 
 const updateDisplay = function () {
 	displayInput.textContent = operation;
+	displayOutput.textContent = answer;
 };
 
 buttons.forEach((e) =>
@@ -28,12 +35,24 @@ buttons.forEach((e) =>
 	})
 );
 
-// let firstNumber;
-// let secondNumber;
-// let operator;
-// let display;
-// let answer;
-// let count = 0;
+btnOperator.forEach((e) =>
+	e.addEventListener("click", (e) => {
+		term1 = +operation.substring(0, operation.length - 1);
+		if (e.target.value === "/") operator = divide;
+		if (e.target.value === "*") operator = multiply;
+		if (e.target.value === "-") operator = subtract;
+		if (e.target.value === "+") operator = add;
+		subOperation = operation;
+	})
+);
+
+btnEqual.addEventListener("click", () => {
+	term2 = Number(operation.replace(subOperation, ""));
+	console.log(term1, term2);
+	answer = operate(term1, term2, operator);
+
+	updateDisplay();
+});
 
 // const changeDisplay = function () {
 // 	displayElement.textContent += this.textContent;
