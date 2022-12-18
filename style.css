@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  height: 100%;
+}
+
+.calc-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 10rem;
+  min-height: 10rem;
+}
+
+.display-clear-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.display {
+  min-width: 5rem;
+  min-height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-container {
+  flex-grow: 1;
+}
+
+.clear-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.clear-container > .clear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  min-width: 5rem;
+  min-height: 5rem;
+}
+
+.input {
+  display: flex;
+}
+
+.numbers > * {
+  display: flex;
+}
+
+.numbers > * > *,
+.operators > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 5rem;
+  min-height: 5rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: solid 1px;
+  margin: 1px;
+}
+.numbers > * > *:hover,
+.operators > *:hover {
+  background-color: lightgray;
+  transition: 0.2s ease-out;
+}
+
+.operators {
+  margin: 1px;
+}/*# sourceMappingURL=style.css.map */

@@ -27,6 +27,23 @@ $size: 5rem;
 	min-height: 10rem;
 }
 
+.display-clear-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.display {
+	min-width: $size;
+	min-height: $size;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.display-container {
+	flex-grow: 1;
+}
+
 .clear-container {
 	display: flex;
 	justify-content: flex-end;
@@ -36,6 +53,7 @@ $size: 5rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		user-select: none;
 		min: {
 			width: $size;
 			height: $size;
@@ -59,4 +77,16 @@ $size: 5rem;
 
 	min-width: $size;
 	min-height: $size;
+
+	user-select: none;
+	border: solid 1px;
+	margin: 1px;
+	&:hover {
+		background-color: lightgray;
+		transition: 0.2s ease-out;
+	}
+}
+
+.operators {
+	margin: 1px;
 }
