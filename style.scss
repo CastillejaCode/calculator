@@ -12,6 +12,7 @@ html {
 
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
@@ -75,6 +76,16 @@ button {
 
 .row-1 {
 	margin-top: calc($size/8);
+}
+
+.footer {
+	position: absolute;
+	top: 97%;
+	left: 90.5%;
+
+	a {
+		all: unset;
+	}
 }
 
 //Hover Effects for buttons

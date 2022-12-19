@@ -12,6 +12,7 @@ html {
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-weight: 400;
@@ -68,6 +69,15 @@ button {
 
 .row-1 {
   margin-top: 0.625rem;
+}
+
+.footer {
+  position: absolute;
+  top: 97%;
+  left: 90.5%;
+}
+.footer a {
+  all: unset;
 }
 
 button:hover {
