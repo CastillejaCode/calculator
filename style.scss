@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: inherit;
+	font-family: "Roboto", sans-serif;
 }
 
 html {
@@ -13,29 +14,43 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: "Roboto", sans-serif;
+
 	font-weight: 400;
 	height: 100%;
+
+	background-color: #eaeaea;
 }
 
 $size: 5rem;
+$calc-color: #c6c4be;
+$background: #eaeaea;
 
 button {
 	min-width: $size;
 	min-height: $size;
 	margin: calc($size/20);
 	font-size: calc($size/4);
+	border-width: 2px;
+	border-radius: 10px;
+	background-color: $background;
+	transition: 0.1s;
 }
 
 .calculator {
+	background-color: $calc-color;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	border: solid #333 2px;
+	border-radius: 10px;
+	padding: calc($size/5);
 }
 
 .display-container {
+	background-color: $background;
 	margin: calc($size/20);
-	border: solid black 1px;
+	border: solid #333 2px;
+	border-radius: 10px;
 	font-size: calc($size/4);
 
 	& > * {
@@ -49,10 +64,46 @@ button {
 .display-upper {
 	justify-content: flex-start;
 }
+
 .display-lower {
 	justify-content: flex-end;
 }
 
 .input > * {
 	display: flex;
+}
+
+.row-1 {
+	margin-top: calc($size/8);
+}
+
+//Hover Effects for buttons
+$red: #fe9985;
+$blue: #9bc7e9;
+$green: #c6e59f;
+$yellow: #fdff85;
+$filter: 100%;
+
+button:hover {
+	background-color: rgb(209, 209, 209);
+}
+
+.clear:hover {
+	filter: brightness($filter);
+	background-color: $red;
+}
+
+.delete:hover {
+	filter: brightness($filter);
+	background-color: $blue;
+}
+
+.equal:hover {
+	filter: brightness($filter);
+	background-color: $green;
+}
+
+.operator:hover {
+	filter: brightness($filter);
+	background-color: $yellow;
 }
