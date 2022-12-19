@@ -123,6 +123,7 @@ btnEqual.addEventListener("click", () => {
 		resetScreen();
 	} else answer = operate(term1, term2, operator);
 
+	if (!term1) answer = operation;
 	checkDecimal();
 	updateDisplay();
 });
