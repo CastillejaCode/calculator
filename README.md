@@ -2,7 +2,7 @@
 
 Use like a normal calculator
 
-There is the ability to use exponents and sqaure roots along with the basic operators
+There is the ability to use exponents and square roots along with the basic operators
 
 You can string multiple operations in succession without using the '=' button
 
